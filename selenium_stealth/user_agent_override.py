@@ -25,6 +25,7 @@ def user_agent_override(
     else:
         override = {"userAgent": ua}
     
+    #send(driver, "Network.setUserAgentOverride", override)
     #send(driver, "Network.setUserAgentOverride", {"source": override})
-    #driver.execute_cdp_cmd('Network.setUserAgentOverride', override)
-    evaluateOnNewDocument(driver, 'Network.setUserAgentOverride', override)
+    driver.execute_cdp_cmd('Network.setUserAgentOverride', override)
+    #evaluateOnNewDocument(driver, 'Network.setUserAgentOverride', override)
