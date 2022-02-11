@@ -1,3 +1,4 @@
+from ast import List
 from selenium.webdriver import Chrome as Driver
 
 from .chrome_app import chrome_app
@@ -30,7 +31,7 @@ If user_agent = None then selenium-stealth only remove the 'headless' from userA
 
 
 def stealth(driver: Driver, user_agent: str = None,
-            languages: [str] = ["en-US", "en"],
+            languages: List[str] = ["en-US", "en"],
             vendor: str = "Google Inc.",
             platform: str = None,
             webgl_vendor: str = "Intel Inc.",
