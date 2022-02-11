@@ -37,8 +37,13 @@ def stealth(driver: Driver, user_agent: str = None,
             renderer: str = "Intel Iris OpenGL Engine",
             fix_hairline: bool = False,
             run_on_insecure_origins: bool = False, **kwargs) -> None:
+    
+    # print("####### MyDriver######", driver)
+    
     if not isinstance(driver, Driver):
         raise ValueError("driver must is selenium.webdriver.Chrome, currently this lib only support Chrome")
+    # if driver.name != "chrome"
+        # raise ValueError("driver name must be chrome")
 
     ua_languages = ','.join(languages)
 

@@ -1,6 +1,5 @@
 from selenium.webdriver import Chrome as Driver
-from .wrapper import evaluateOnNewDocument
-from pathlib import Path
+from .wrapper import add_script, send
 
 
 def user_agent_override(
@@ -11,7 +10,8 @@ def user_agent_override(
         **kwargs
 ) -> None:
     if user_agent is None:
-        ua = driver.execute_cdp_cmd("Browser.getVersion", {})['userAgent']
+        ua = send(driver, "Browser.getVersion", {})['userAgent']
+        # ua = driver.execute_cdp_cmd("Browser.getVersion", {})['userAgent']
     else:
         ua = user_agent
     ua = ua.replace("HeadlessChrome", "Chrome")  # hide headless nature
@@ -25,16 +25,5 @@ def user_agent_override(
     else:
         override = {"userAgent": ua}
     
-    print(f"====Overwrite user agent {str(override)}")
-
-    driver.execute_cdp_cmd('Network.setUserAgentOverride', override)
-    
-    evaluateOnNewDocument(
-        driver, f"Network.setUserAgentOverride({str(override)})"
-    )    
-
-
-# def navigator_webdriver(driver: Driver, **kwargs) -> None:
-#     evaluateOnNewDocument(
-#         driver, Path(__file__).parent.joinpath("js/navigator.webdriver.js").read_text()
-#     )
+    send(driver, "Network.setUserAgentOverride", {"source": override})
+    # driver.execute_cdp_cmd('Network.setUserAgentOverride', override)
