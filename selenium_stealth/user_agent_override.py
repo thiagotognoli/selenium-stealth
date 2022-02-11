@@ -1,3 +1,4 @@
+from pathlib import Path
 from selenium.webdriver import Chrome as Driver
 from .wrapper import add_script, evaluateOnNewDocument, send
 
@@ -27,5 +28,13 @@ def user_agent_override(
     
     #send(driver, "Network.setUserAgentOverride", override)
     #send(driver, "Network.setUserAgentOverride", {"source": override})
-    driver.execute_cdp_cmd('Network.setUserAgentOverride', override)
     #evaluateOnNewDocument(driver, 'Network.setUserAgentOverride', override)
+    
+    
+    driver.execute_cdp_cmd('Network.setUserAgentOverride', override)
+    
+    evaluateOnNewDocument(
+        driver, Path(__file__).parent.joinpath("js/platform.js").read_text(),
+        platform
+    )
+    
