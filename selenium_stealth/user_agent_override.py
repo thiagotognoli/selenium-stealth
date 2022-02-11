@@ -1,5 +1,5 @@
 from selenium.webdriver import Chrome as Driver
-from .wrapper import add_script, send
+from .wrapper import add_script, evaluateOnNewDocument, send
 
 
 def user_agent_override(
@@ -25,5 +25,6 @@ def user_agent_override(
     else:
         override = {"userAgent": ua}
     
-    send(driver, "Network.setUserAgentOverride", {"source": override})
-    # driver.execute_cdp_cmd('Network.setUserAgentOverride', override)
+    #send(driver, "Network.setUserAgentOverride", {"source": override})
+    #driver.execute_cdp_cmd('Network.setUserAgentOverride', override)
+    evaluateOnNewDocument(driver, 'Network.setUserAgentOverride', override)
