@@ -30,12 +30,20 @@ def user_agent_override(
     #send(driver, "Network.setUserAgentOverride", {"source": override})
     #evaluateOnNewDocument(driver, 'Network.setUserAgentOverride', override)
 
-    override["userAgentMetadata"] = driver.execute_script(
+    # override["userAgentMetadata"] = driver.execute_script(
+    #     'return '+evaluationString(
+    #         Path(__file__).parent.joinpath("js/platform.js").read_text(),
+    #         {"userAgent": user_agent, "language": language, "platform": platform, "maskLinux": False }
+    #     )
+    # )
+    
+    override = driver.execute_script(
         'return '+evaluationString(
             Path(__file__).parent.joinpath("js/platform.js").read_text(),
             {"userAgent": user_agent, "language": language, "platform": platform, "maskLinux": False }
         )
     )
+    override["acceptLanguage"] = language
      
     # r = driver.execute_cdp_cmd('() => {"a": 1}', {})
     # print(f"=================== r = {r}")

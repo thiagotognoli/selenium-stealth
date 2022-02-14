@@ -122,17 +122,31 @@ opts => {
   // )
 
 
-  const userAgentData = {
-    brands: _getBrands(),
-    fullVersion: uaVersion,
-    platform: _getPlatform(true),
-    platformVersion: _getPlatformVersion(),
-    architecture: _getPlatformArch(),
-    model: _getPlatformModel(),
-    mobile: _getMobile()
+  // const userAgentData = {
+  //   brands: _getBrands(),
+  //   fullVersion: uaVersion,
+  //   platform: _getPlatform(true),
+  //   platformVersion: _getPlatformVersion(),
+  //   architecture: _getPlatformArch(),
+  //   model: _getPlatformModel(),
+  //   mobile: _getMobile()
+  // }
+
+  const override = {
+    userAgent: ua,
+    platform: _getPlatform(),
+    userAgentMetadata: {
+      brands: _getBrands(),
+      fullVersion: uaVersion,
+      platform: _getPlatform(true),
+      platformVersion: _getPlatformVersion(),
+      architecture: _getPlatformArch(),
+      model: _getPlatformModel(),
+      mobile: _getMobile()
+    }
   }
 
-  return userAgentData
+  return override
   // console.log(navigator)
 
   // utils.replaceGetterWithProxy(
