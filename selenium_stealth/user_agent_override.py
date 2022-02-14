@@ -31,10 +31,10 @@ def user_agent_override(
     #evaluateOnNewDocument(driver, 'Network.setUserAgentOverride', override)
     
     
-    # driver.execute_cdp_cmd('Network.setUserAgentOverride', override)
+    driver.execute_cdp_cmd('Network.setUserAgentOverride', override)
     
-    evaluateOnNewDocument(
-        driver, Path(__file__).parent.joinpath("js/platform.js").read_text(),
-        { "userAgent": user_agent, "language": language, "platform": platform, "maskLinux": False }
-    )
+    # evaluateOnNewDocument(
+    #     driver, Path(__file__).parent.joinpath("js/platform.js").read_text(),
+    #     { "userAgent": user_agent, "language": language, "platform": platform, "maskLinux": False }
+    # )
     
