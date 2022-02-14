@@ -42,6 +42,9 @@ def user_agent_override(
     )
     if language:
         override["acceptLanguage"] = language
+        
+    if platform:
+        override["platform"] = platform
      
     driver.execute_cdp_cmd('Network.setUserAgentOverride', override)
     
