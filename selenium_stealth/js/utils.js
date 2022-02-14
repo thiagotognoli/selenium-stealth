@@ -13,7 +13,7 @@
    * Alternatively take a look at the `extract-stealth-evasions` package to create a finished bundle which includes these utilities.
    *
    */
-  const utils = {}
+  utils = {}
 
   utils.init = () => {
     utils.preloadCache()
