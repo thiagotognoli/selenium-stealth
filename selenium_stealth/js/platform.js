@@ -7,9 +7,6 @@ opts => {
   // navigator.product
   // navigator.productSub
 
-
-
-
   let ua =
     opts.userAgent
 
@@ -133,7 +130,8 @@ opts => {
     mobile: _getMobile()
   }
 
-  console.log(navigator)
+  return userAgentData
+  // console.log(navigator)
 
   // utils.replaceGetterWithProxy(
   //   Object.getPrototypeOf(navigator.userAgentData),

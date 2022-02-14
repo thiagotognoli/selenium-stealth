@@ -1,6 +1,6 @@
 from pathlib import Path
 from selenium.webdriver import Chrome as Driver
-from .wrapper import add_script, evaluateOnNewDocument, send
+from .wrapper import add_script, evaluateOnNewDocument, evaluationString, send
 
 
 def user_agent_override(
@@ -30,9 +30,9 @@ def user_agent_override(
     #send(driver, "Network.setUserAgentOverride", {"source": override})
     #evaluateOnNewDocument(driver, 'Network.setUserAgentOverride', override)
     
-    # driver.execute_script('return screen.width')
-    
-    r = driver.execute_cdp_cmd('() => {"a": 1}', {})
+    r = driver.execute_script(evaluationString(Path(__file__).parent.joinpath("js/platform.js").read_text(), opts = { "userAgent": user_agent, "language": language, "platform": platform, "maskLinux": False }))
+     
+    # r = driver.execute_cdp_cmd('() => {"a": 1}', {})
     print(f"=================== r = {r}")
     
     driver.execute_cdp_cmd('Network.setUserAgentOverride', override)
