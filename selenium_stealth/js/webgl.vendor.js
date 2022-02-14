@@ -7,8 +7,12 @@
     apply: function(target, ctx, args) {
       const param = (args || [])[0]
       const result = utils.cache.Reflect.apply(target, ctx, args)
-      console.log('opts==x')
-      console.log(`param:${param}=|${result}|`)
+      
+      if (result == null) {
+        // console.log('opts==x')
+        // console.log(`param:${param}=|${result}|`)
+        return `param:${param}=|${result}|`
+      }
 
       // UNMASKED_VENDOR_WEBGL
       if (param === 37445) {
