@@ -7,15 +7,23 @@
     apply: function(target, ctx, args) {
       const param = (args || [])[0]
       const result = utils.cache.Reflect.apply(target, ctx, args)
-      console.log('opts==2')
-      console.log(opts)
-      console.log(param)
+      console.log('opts==XXX')
+      console.log(`param:${param}=|${result}|`)
+
       // UNMASKED_VENDOR_WEBGL
       if (param === 37445) {
+        console.log('opts==XXX')
+        console.log(opts)
+        console.log(param)
+  
         return opts.vendor || 'Intel Inc.' // default in headless: Google Inc.
       }
       // UNMASKED_RENDERER_WEBGL
       if (param === 37446) {
+        console.log('opts==XXX')
+        console.log(opts)
+        console.log(param)
+  
         return opts.renderer || 'Intel Iris OpenGL Engine' // default in headless: Google SwiftShader
       }
       return result
