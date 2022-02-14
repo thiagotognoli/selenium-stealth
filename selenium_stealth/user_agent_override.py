@@ -32,14 +32,14 @@ def user_agent_override(
 
     print(        evaluationString(
             Path(__file__).parent.joinpath("js/platform.js").read_text(),
-            {"opts": {"userAgent": user_agent, "language": language, "platform": platform, "maskLinux": False }}
+            {"userAgent": user_agent, "language": language, "platform": platform, "maskLinux": False }
         )
 )
         
     r = driver.execute_script(
         evaluationString(
             Path(__file__).parent.joinpath("js/platform.js").read_text(),
-            {"opts": {"userAgent": user_agent, "language": language, "platform": platform, "maskLinux": False }}
+            {"userAgent": user_agent, "language": language, "platform": platform, "maskLinux": False }
         )
     )
      
