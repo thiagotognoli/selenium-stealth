@@ -132,8 +132,15 @@ opts => {
     model: _getPlatformModel(),
     mobile: _getMobile()
   }
+  
+  console.log(navigator.userAgentData)
 
-  utils.replaceWithProxy(navigator, 'userAgentData', userAgentData)
+  utils.replaceGetterWithProxy(
+    Object.getPrototypeOf(navigator.userAgentData),
+    'platform',
+    utils.makeHandler().getterValue(_getPlatform(true))
+  )
+  // utils.replaceWithProxy(navigator, 'userAgentData', userAgentData)
 
   // utils.replaceGetterWithProxy(
   //   Object.getPrototypeOf(navigator),
