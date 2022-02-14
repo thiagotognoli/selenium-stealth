@@ -115,23 +115,29 @@ opts => {
   //   'platform',
   //   utils.makeHandler().getterValue(opts.platform || 'Win64')
   // )
-  
+
   utils.replaceGetterWithProxy(
     Object.getPrototypeOf(navigator),
     'platform',
     utils.makeHandler().getterValue(_getPlatform() || 'Win64')
   )
-  utils.replaceGetterWithProxy(
-    Object.getPrototypeOf(navigator),
-    'userAgentData',
-    utils.makeHandler().getterValue({
-      brands: _getBrands(),
-      fullVersion: uaVersion,
-      platform: _getPlatform(true),
-      platformVersion: _getPlatformVersion(),
-      architecture: _getPlatformArch(),
-      model: _getPlatformModel(),
-      mobile: _getMobile()
-    })
-  )
+
+
+  const userAgentData = {
+    brands: _getBrands(),
+    fullVersion: uaVersion,
+    platform: _getPlatform(true),
+    platformVersion: _getPlatformVersion(),
+    architecture: _getPlatformArch(),
+    model: _getPlatformModel(),
+    mobile: _getMobile()
+  }
+
+  utils.replaceWithProxy(navigator, 'userAgentData', userAgentData)
+
+  // utils.replaceGetterWithProxy(
+  //   Object.getPrototypeOf(navigator),
+  //   'userAgentData',
+  //   utils.makeHandler().getterValue(userAgentData)
+  // )
 }
