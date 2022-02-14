@@ -43,7 +43,8 @@ def user_agent_override(
             {"userAgent": user_agent, "language": language, "platform": platform, "maskLinux": False }
         )
     )
-    override["acceptLanguage"] = language
+    if language:
+        override["acceptLanguage"] = language
      
     # r = driver.execute_cdp_cmd('() => {"a": 1}', {})
     # print(f"=================== r = {r}")
