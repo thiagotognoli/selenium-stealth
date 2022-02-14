@@ -7,7 +7,7 @@
     apply: function(target, ctx, args) {
       const param = (args || [])[0]
       const result = utils.cache.Reflect.apply(target, ctx, args)
-      console.log('opts==XXX')
+      console.log('opts==x')
       console.log(`param:${param}=|${result}|`)
 
       // UNMASKED_VENDOR_WEBGL
