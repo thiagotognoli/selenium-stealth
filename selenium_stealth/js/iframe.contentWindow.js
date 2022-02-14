@@ -18,6 +18,10 @@
           if (key === 'frameElement') {
             return iframe
           }
+          // Intercept iframe.contentWindow[0] to hide the property 0 added by the proxy.
+          if (key === '0') {
+              return undefined
+          }
           return Reflect.get(target, key)
         }
       }
@@ -49,10 +53,10 @@
       // We need to be very surgical here to not break other iframes by accident
       Object.defineProperty(iframe, 'srcdoc', {
         configurable: true, // Important, so we can reset this later
-        get: function () {
-          return _iframe.srcdoc
+        get: function() {
+          return _srcdoc
         },
-        set: function (newValue) {
+        set: function(newValue) {
           addContentWindowProxy(this)
           // Reset property, the hook is only needed once
           Object.defineProperty(iframe, 'srcdoc', {
@@ -69,12 +73,12 @@
     // Adds a hook to intercept iframe creation events
     const addIframeCreationSniffer = () => {
       /* global document */
-      const createElement = {
+      const createElementHandler = {
         // Make toString() native
         get(target, key) {
           return Reflect.get(target, key)
         },
-        apply: function (target, thisArg, args) {
+        apply: function(target, thisArg, args) {
           const isIframe =
             args && args.length && `${args[0]}`.toLowerCase() === 'iframe'
           if (!isIframe) {
@@ -86,9 +90,10 @@
         }
       }
       // All this just due to iframes with srcdoc bug
-      document.createElement = new Proxy(
-        document.createElement,
-        createElement
+      utils.replaceWithProxy(
+        document,
+        'createElement',
+        createElementHandler
       )
     }
 

@@ -11,6 +11,5 @@ def webgl_vendor_override(
 ) -> None:
     evaluateOnNewDocument(
         driver, Path(__file__).parent.joinpath("js/webgl.vendor.js").read_text(),
-        webgl_vendor,
-        renderer,
+        {"vendor": webgl_vendor, "renderer": renderer}
     )

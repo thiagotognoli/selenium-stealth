@@ -33,7 +33,7 @@
 
   const canPlayType = {
     // Intercept certain requests
-    apply: function (target, ctx, args) {
+    apply: function(target, ctx, args) {
       if (!args || !args.length) {
         return target.apply(ctx, args)
       }

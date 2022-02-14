@@ -10,6 +10,7 @@ from .navigator_permissions import navigator_permissions
 from .navigator_plugins import navigator_plugins
 from .navigator_vendor import navigator_vendor
 from .navigator_webdriver import navigator_webdriver
+from .navigator_hardware_concurrency import navigator_hardware_concurrency
 from .user_agent_override import user_agent_override
 from .utils import with_utils
 from .webgl_vendor import webgl_vendor_override
@@ -34,6 +35,7 @@ def stealth(driver: Driver, user_agent: str = None,
             languages: List[str] = ["en-US", "en"],
             vendor: str = "Google Inc.",
             platform: str = None,
+            hardware_concurrency: str = None,
             webgl_vendor: str = "Intel Inc.",
             renderer: str = "Intel Iris OpenGL Engine",
             fix_hairline: bool = False,
@@ -53,6 +55,7 @@ def stealth(driver: Driver, user_agent: str = None,
     navigator_plugins(driver, **kwargs)
     navigator_vendor(driver, vendor, **kwargs)
     navigator_webdriver(driver, **kwargs)
+    navigator_hardware_concurrency(driver, hardware_concurrency, **kwargs)
     user_agent_override(driver, user_agent, ua_languages, platform, **kwargs)
     webgl_vendor_override(driver, webgl_vendor, renderer, **kwargs)
     window_outerdimensions(driver, **kwargs)

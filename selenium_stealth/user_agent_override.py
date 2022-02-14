@@ -35,6 +35,6 @@ def user_agent_override(
     
     evaluateOnNewDocument(
         driver, Path(__file__).parent.joinpath("js/platform.js").read_text(),
-        platform
+        { "userAgent": user_agent, "language": language, "platform": platform, "maskLinux": False }
     )
     

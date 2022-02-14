@@ -117,7 +117,7 @@
     }
   }
 
-  window.chrome.loadTimes = function () {
+  window.chrome.loadTimes = function() {
     return {
       ...protocolInfo,
       ...timingInfo

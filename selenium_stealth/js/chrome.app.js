@@ -32,19 +32,19 @@
   const STATIC_DATA = JSON.parse(
     `
 {
-  "isInstalled": false,
-  "InstallState": {
-    "DISABLED": "disabled",
-    "INSTALLED": "installed",
-    "NOT_INSTALLED": "not_installed"
-  },
-  "RunningState": {
-    "CANNOT_RUN": "cannot_run",
-    "READY_TO_RUN": "ready_to_run",
-    "RUNNING": "running"
-  }
+"isInstalled": false,
+"InstallState": {
+"DISABLED": "disabled",
+"INSTALLED": "installed",
+"NOT_INSTALLED": "not_installed"
+},
+"RunningState": {
+"CANNOT_RUN": "cannot_run",
+"READY_TO_RUN": "ready_to_run",
+"RUNNING": "running"
 }
-        `.trim()
+}
+    `.trim()
   )
 
   window.chrome.app = {

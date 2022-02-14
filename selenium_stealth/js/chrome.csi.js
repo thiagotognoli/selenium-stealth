@@ -24,7 +24,7 @@
 
   const { timing } = window.performance
 
-  window.chrome.csi = function () {
+  window.chrome.csi = function() {
     return {
       onloadT: timing.domContentLoadedEventEnd,
       startE: timing.navigationStart,

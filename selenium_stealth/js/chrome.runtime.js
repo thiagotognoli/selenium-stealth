@@ -1,7 +1,7 @@
 // https://github.com/berstend/puppeteer-extra/blob/c44c8bb0224c6bba2554017bfb9d7a1d0119f92f/packages/puppeteer-extra-plugin-stealth/evasions/chrome.runtime/index.js
 
-(runOnInsecureOrigins) => {
-  const STATIC_DATA = {
+(opts) => {
+  STATIC_DATA = {
     "OnInstalledReason": {
       "CHROME_UPDATE": "chrome_update",
       "INSTALL": "install",
@@ -42,6 +42,7 @@
       "UPDATE_AVAILABLE": "update_available"
     }
   }
+  //start copy from pupeteer extras  
   if (!window.chrome) {
     // Use the exact property descriptor found in headful Chrome
     // fetch it via `Object.getOwnPropertyDescriptor(window, 'chrome')`
@@ -57,7 +58,7 @@
   const existsAlready = 'runtime' in window.chrome
   // `chrome.runtime` is only exposed on secure origins
   const isNotSecure = !window.location.protocol.startsWith('https')
-  if (existsAlready || (isNotSecure && !runOnInsecureOrigins)) {
+  if (existsAlready || (isNotSecure && !opts.runOnInsecureOrigins)) {
     return // Nothing to do here
   }
 
@@ -80,7 +81,7 @@
     ),
     MustSpecifyExtensionID: new TypeError(
       preamble +
-      `${method} called from a webpage must specify an Extension ID (string) for its first argument.`
+        `${method} called from a webpage must specify an Extension ID (string) for its first argument.`
     ),
     InvalidExtensionID: new TypeError(
       preamble + `Invalid extension id: '${extensionId}'`
@@ -94,7 +95,7 @@
 
   /** Mock `chrome.runtime.sendMessage` */
   const sendMessageHandler = {
-    apply: function (target, ctx, args) {
+    apply: function(target, ctx, args) {
       const [extensionId, options, responseCallback] = args || []
 
       // Define custom errors
@@ -140,7 +141,7 @@
   utils.mockWithProxy(
     window.chrome.runtime,
     'sendMessage',
-    function sendMessage() { },
+    function sendMessage() {},
     sendMessageHandler
   )
 
@@ -150,7 +151,7 @@
    * @see https://developer.chrome.com/apps/runtime#method-connect
    */
   const connectHandler = {
-    apply: function (target, ctx, args) {
+    apply: function(target, ctx, args) {
       const [extensionId, connectInfo] = args || []
 
       // Define custom errors
@@ -205,7 +206,7 @@
           const MismatchError = (propName, expected, found) =>
             TypeError(
               errorPreamble +
-              `Error at property '${propName}': Invalid type: expected ${expected}, found ${found}.`
+                `Error at property '${propName}': Invalid type: expected ${expected}, found ${found}.`
             )
           if (k === 'name' && typeof v !== 'string') {
             throw MismatchError(k, 'string', typeof v)
@@ -227,25 +228,25 @@
   utils.mockWithProxy(
     window.chrome.runtime,
     'connect',
-    function connect() { },
+    function connect() {},
     connectHandler
   )
 
   function makeConnectResponse() {
     const onSomething = () => ({
-      addListener: function addListener() { },
-      dispatch: function dispatch() { },
-      hasListener: function hasListener() { },
+      addListener: function addListener() {},
+      dispatch: function dispatch() {},
+      hasListener: function hasListener() {},
       hasListeners: function hasListeners() {
         return false
       },
-      removeListener: function removeListener() { }
+      removeListener: function removeListener() {}
     })
 
     const response = {
       name: '',
       sender: undefined,
-      disconnect: function disconnect() { },
+      disconnect: function disconnect() {},
       onDisconnect: onSomething(),
       onMessage: onSomething(),
       postMessage: function postMessage() {

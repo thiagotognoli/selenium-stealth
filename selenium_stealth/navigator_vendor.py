@@ -5,5 +5,5 @@ from selenium.webdriver import Chrome as Driver
 
 def navigator_vendor(driver: Driver, vendor: str, **kwargs) -> None:
     evaluateOnNewDocument(
-        driver, Path(__file__).parent.joinpath("js/navigator.vendor.js").read_text(), vendor
+        driver, Path(__file__).parent.joinpath("js/navigator.vendor.js").read_text(), {"vendor": vendor}
     )
