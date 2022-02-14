@@ -19,9 +19,11 @@ opts => {
   }
 
   // Full version number from Chrome
-  const uaVersion = ua.includes('Chrome/')
-    ? ua.match(/Chrome\/([\d|.]+)/)[1]
-    : (await page.browser().version()).match(/\/([\d|.]+)/)[1]
+  // const uaVersion = ua.includes('Chrome/')
+  //   ? ua.match(/Chrome\/([\d|.]+)/)[1]
+  //   : (await page.browser().version()).match(/\/([\d|.]+)/)[1]
+
+  const uaVersion = ua.match(/Chrome\/([\d|.]+)/)[1]
 
   // Get platform identifier (short or long version)
   const _getPlatform = (extended = false) => {
