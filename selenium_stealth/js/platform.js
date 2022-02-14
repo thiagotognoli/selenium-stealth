@@ -116,11 +116,11 @@ opts => {
   //   utils.makeHandler().getterValue(opts.platform || 'Win64')
   // )
 
-  utils.replaceGetterWithProxy(
-    Object.getPrototypeOf(navigator),
-    'platform',
-    utils.makeHandler().getterValue(_getPlatform() || 'Win64')
-  )
+  // utils.replaceGetterWithProxy(
+  //   Object.getPrototypeOf(navigator),
+  //   'platform',
+  //   utils.makeHandler().getterValue(_getPlatform() || 'Win64')
+  // )
 
 
   const userAgentData = {
@@ -132,14 +132,14 @@ opts => {
     model: _getPlatformModel(),
     mobile: _getMobile()
   }
-  
-  console.log(navigator.userAgentData)
 
-  utils.replaceGetterWithProxy(
-    Object.getPrototypeOf(navigator.userAgentData),
-    'platform',
-    utils.makeHandler().getterValue(_getPlatform(true))
-  )
+  console.log(navigator)
+
+  // utils.replaceGetterWithProxy(
+  //   Object.getPrototypeOf(navigator.userAgentData),
+  //   'platform',
+  //   utils.makeHandler().getterValue(_getPlatform(true))
+  // )
   // utils.replaceWithProxy(navigator, 'userAgentData', userAgentData)
 
   // utils.replaceGetterWithProxy(
