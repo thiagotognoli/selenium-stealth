@@ -30,7 +30,7 @@ def user_agent_override(
     #send(driver, "Network.setUserAgentOverride", {"source": override})
     #evaluateOnNewDocument(driver, 'Network.setUserAgentOverride', override)
     
-    r = driver.execute_cdp_cmd('return {"a": 1}')
+    r = driver.execute_cdp_cmd('return {"a": 1}', None)
     print(f"=================== r = {r}")
     
     driver.execute_cdp_cmd('Network.setUserAgentOverride', override)
