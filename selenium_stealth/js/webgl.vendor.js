@@ -32,7 +32,7 @@
           return opts.renderer || 'Intel Iris OpenGL Engine';
         }
         try {
-          return cache.Reflect.apply(target, thisArg, args);
+          return utils.cache.Reflect.apply(target, thisArg, args);
         } catch (err) {
           err.stack = stripErrorStack(err.stack);
           throw err;
